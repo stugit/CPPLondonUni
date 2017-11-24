@@ -1,0 +1,144 @@
+[centos ~/dev/CPPLondonUni/CPPLondonUni/noughts_and_crosses]$ tictactoe
+What is your name player 1?
+Mr One
+Please select a token Mr One (o or x)?
+o
+What is your name player 2?
+Mr Two
+Starting game 1
+Player 1: [Name: Mr Two, Token: x, Score: 0]
+Player 2: [Name: Mr One, Token: o, Score: 0]
+
+   |   |
+---+---+---
+   |   |
+---+---+---
+   |   |
+
+
+Move number 1
+Please select row Mr One?
+0
+Please select column Mr One?
+0
+
+ O |   |
+---+---+---
+   |   |
+---+---+---
+   |   |
+
+
+Move number 2
+Please select row Mr Two?
+0
+Please select column Mr Two?
+1
+
+ O | X |
+---+---+---
+   |   |
+---+---+---
+   |   |
+
+
+Move number 3
+Please select row Mr One?
+0
+Please select column Mr One?
+2
+
+ O | X | O
+---+---+---
+   |   |
+---+---+---
+   |   |
+
+
+Move number 4
+Please select row Mr Two?
+1
+Please select column Mr Two?
+1
+
+ O | X | O
+---+---+---
+   | X |
+---+---+---
+   |   |
+
+
+Move number 5
+Please select row Mr One?
+3
+Please select row Mr One?
+2
+Please select column Mr One?
+1
+
+ O | X | O
+---+---+---
+   | X |
+---+---+---
+   | O |
+
+
+Move number 6
+Please select row Mr Two?
+2
+Please select column Mr Two?
+1
+(2,1) is an invalid move, please try again.
+Please select row Mr Two?
+2
+Please select column Mr Two?
+0
+
+ O | X | O
+---+---+---
+   | X |
+---+---+---
+ X | O |
+
+
+Move number 7
+Please select row Mr One?
+1
+Please select column Mr One?
+0
+
+ O | X | O
+---+---+---
+ O | X |
+---+---+---
+ X | O |
+
+
+Move number 8
+Please select row Mr Two?
+1
+Please select column Mr Two?
+2
+
+ O | X | O
+---+---+---
+ O | X | X
+---+---+---
+ X | O |
+
+
+Move number 9
+Please select row Mr One?
+2
+Please select column Mr One?
+2
+
+ O | X | O
+---+---+---
+ O | X | X
+---+---+---
+ X | O | O
+
+
+ It's a draw!
+Do you want want another go (y/n)?
