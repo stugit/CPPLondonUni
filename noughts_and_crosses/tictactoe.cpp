@@ -65,13 +65,60 @@ std::ostream& operator<<(std::ostream& os, const board& b)
 // TODO: Implement this function correctly
 bool check_winner(const board& b, entry e)
 {
+	int count = 0;
+	// check rows
+	for (int r=0; r<3; r++) {
+		count = 0;
+		for (int c=0; c<3; c++) {
+			if (b(r, c) == e) {
+				count++;
+			}
+			if (count == 3) {
+				return true;
+			}
+		}
+	}
+
+	// check columns
+	for (int c=0; c<3; c++) {
+		count = 0;
+		for (int r=0; r<3; r++) {
+			if (b(r, c) == e) {
+				count++;
+			}
+			if (count == 3) {
+				return true;
+			}
+		}
+	}
+
+	// check diagonals
+	if (b(0,0) == e && b(1,1) == e && b(2,2) == e) {
+		return true;
+	}
+
+	if (b(0,2) == e && b(1,1) == e && b(2,0) == e) {
+		return true;
+	}
+
     return false;
 }
 
 // TODO: Implement this function correctly
-bool check_draw(const board&)
+// If no more available moves and no one has won it must be a draw.
+bool check_draw(const board& b)
 {
-    return false;
+	// count empties
+	int count = 0;
+	for (int r=0; r<3; r++) {
+		for (int c=0; c<3; c++) {
+			if (b(r, c) == tictactoe::entry::empty) {
+				return false;
+			}
+		}
+	}
+
+    return true;
 }
 
 
