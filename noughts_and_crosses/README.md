@@ -69,3 +69,11 @@ to help you get started -- you are  not required to use them.
   multiple games etc later if you have time.
 
 **Have fun!**
+
+
+Usage: 
+To stream random keystrokes to tictactoe.
+Edit play_tictactoe.py to configure names and how many games you want to play.
+
+Then run:
+python3 play_tictactoe.py | tictactoe
