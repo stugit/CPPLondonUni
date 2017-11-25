@@ -1,0 +1,85 @@
+[centos ~/dev/CPPLondonUni/CPPLondonUni/noughts_and_crosses]$ tictactoe
+What is your name player 1?
+Mr One
+Please select a token Mr One (o or x)?
+o
+What is your name player 2?
+Mr Two
+Starting game 1
+Player 1: [Name: Mr One, Token: o, Score: 0]
+Player 2: [Name: Mr Two, Token: x, Score: 0]
+
+   |   |
+---+---+---
+   |   |
+---+---+---
+   |   |
+
+
+Move number 1
+Please select row Mr Two?
+0
+Please select column Mr Two?
+0
+
+ X |   |
+---+---+---
+   |   |
+---+---+---
+   |   |
+
+
+Move number 2
+Please select row Mr One?
+1
+Please select column Mr One?
+1
+
+ X |   |
+---+---+---
+   | O |
+---+---+---
+   |   |
+
+
+Move number 3
+Please select row Mr Two?
+0
+Please select column Mr Two?
+1
+
+ X | X |
+---+---+---
+   | O |
+---+---+---
+   |   |
+
+
+Move number 4
+Please select row Mr One?
+2
+Please select column Mr One?
+0
+
+ X | X |
+---+---+---
+   | O |
+---+---+---
+ O |   |
+
+
+Move number 5
+Please select row Mr Two?
+0
+Please select column Mr Two?
+2
+
+ X | X | X
+---+---+---
+   | O |
+---+---+---
+ O |   |
+
+
+[Name: Mr Two, Token: x, Score: 20] has won this game!
+Do you want want another go (y/n)?
