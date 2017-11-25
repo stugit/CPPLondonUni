@@ -7,15 +7,18 @@
 
 using namespace std;
 
+
 class PlayerException: public std::runtime_error {
 public:
 		PlayerException() : std::runtime_error("PlayerException") { }
 };
 
+
 class TokenException: public std::runtime_error {
 public:
 		TokenException() : std::runtime_error("TokenException") { }
 };
+
 
 class Player {
 public:
@@ -78,6 +81,7 @@ char ask_token(std::string& player_);
 char ask_yn(std::string& question_);
 void play_a_game(int game_no, Player& p1, Player& p2);
 void make_move(tictactoe::board& b, Player& p);
+tictactoe::entry token_map(char token_);
 
 int main() {
 	const int number_of_players = 2;
@@ -85,7 +89,16 @@ int main() {
 
 	std::string n1 = "player 1";
 	n1 = ask_name(n1);
-	char t1 = ask_token(n1);
+
+	char t1;
+	try {
+		t1 = ask_token(n1);
+	}
+	catch (TokenException& e) {
+		cout << "TokenException" << endl;
+		exit(2);
+	}
+	
 
 	Player p1 = Player(n1, t1);
 
@@ -107,7 +120,7 @@ int main() {
 		game_no++;
 
 		// swap who starts first
-		if (game_no % 2 == 0) {
+		if (game_no % 2 == 1) {
 			play_a_game(game_no, p1, p2);
 		}
 		else {
@@ -123,11 +136,11 @@ int main() {
 
 	if (p1.score() > p2.score()) {
 		cout << p1.name();
-		cout << "has won, well done!" << endl;
+		cout << " has won, well done!" << endl;
 	}
 	else if (p2.score() > p1.score()) {
 		cout << p2.name();
-		cout << "has won, well done!" << endl;
+		cout << " has won, well done!" << endl;
 	} else {
 		cout << "It's a draw!" << endl;
 	}
@@ -137,6 +150,7 @@ int main() {
 
 	return 0;
 }
+
 
 std::string ask_name (std::string& player) {
 	std::string name = "";
@@ -148,6 +162,7 @@ std::string ask_name (std::string& player) {
 
 	return name;
 }
+
 
 char ask_token (std::string& player_) {
 	char t;
@@ -168,6 +183,12 @@ char ask_token (std::string& player_) {
 	}
 }
 
+
+// Play a single game of tictactoe
+// inputs: 
+//		game_no - the number of games played so far
+//		p1 - player 1 the player going first this time around
+//		p2 - player 2, the player going second  this time around
 void play_a_game(int game_no, Player& p1, Player& p2) {
 	std::cout << "Starting game " << game_no << endl;
 	std::cout << "Player 1: " <<  p1 << std::endl;
@@ -176,39 +197,33 @@ void play_a_game(int game_no, Player& p1, Player& p2) {
 	tictactoe::board b = tictactoe::board();	
 	cout << b << endl;
 
-	// We play until some one wins or until there are no more moves
+	// We play until some one wins 
+	// or until there are no more moves (a draw is then declared)
 	int i = 1;
 	bool in_play = true;
 	while (in_play) {
 		cout << "Move number " << i << endl;
 		if (i % 2 == 0) {
 			make_move(b, p1);
+			cout << b << endl;
+			tictactoe::entry t = token_map(p1.token());
+			if (check_winner(b, t)) {
+				p1.win();
+				cout << p1 << " has won this game!" << endl;
+				in_play = false;
+			}
 		}
 		else {
 			make_move(b, p2);
+			cout << b << endl;
+			tictactoe::entry t = token_map(p2.token());
+			if (check_winner(b, t)) {
+				p2.win();
+				cout << p2 << " has won this game!" << endl;
+				in_play = false;
+			}
 		}
-		cout << b << endl;
-		if (check_winner(b, tictactoe::entry::nought)) {
-			if (p1.token() == 'o') {
-				p1.win();
-				cout << p1 << " has won!" << endl;
-			}
-		   	if (p2.token() == 'o') {
-				p2.win();
-				cout << p2 << " has won!" << endl;
-			}
-			in_play = false;
-		} else if (check_winner(b, tictactoe::entry::cross)) {
-			if (p1.token() == 'x') {
-				p1.win();
-				cout << p1 << " has won!" << endl;
-			}
-			if (p2.token() == 'x') {
-				p2.win();
-				cout << p2 << " has won!" << endl;
-			}
-			in_play = false;
-		} 
+		 
 		if (check_draw(b)) {
 			p1.draw();
 			p2.draw();
@@ -219,6 +234,9 @@ void play_a_game(int game_no, Player& p1, Player& p2) {
 	}
 }
 
+
+// Ask a Yes / No question
+// Only allow y or n as an answer
 char ask_yn(std::string& question_) { 
 	char yn = ' ';
 	cout << question_ << endl;
@@ -226,6 +244,7 @@ char ask_yn(std::string& question_) {
 		yn = getchar();
 	} while (yn != 'n' && yn != 'y');
 }
+
 
 void make_move(tictactoe::board& b, Player& p) {
 	int r = -1;
@@ -242,7 +261,6 @@ void make_move(tictactoe::board& b, Player& p) {
 			std::cout << "Please select row " << p.name() << "?" << std::endl;
 			cin >> input;
 			r = input.at(0) - '0';
-			cout << "row: " << r << endl;
 		} while (r < 0 || r > 2);
 
 		// get column
@@ -250,7 +268,6 @@ void make_move(tictactoe::board& b, Player& p) {
 			std::cout << "Please select column " << p.name() << "?" << std::endl;
 			cin >> input;
 			c = input.at(0) - '0';
-			cout << "column: " << c << endl;
 		} while (c < 0 || c > 2);
 
 		// check if valid move
@@ -263,9 +280,22 @@ void make_move(tictactoe::board& b, Player& p) {
 		}
 	} while (is_valid_move == false);
 
-	if (p.token() == 'o') {
-		b(r, c) = tictactoe::entry::nought;
-	} else if (p.token() == 'x') {
-		b(r, c) = tictactoe::entry::cross;
+	// see comment for token_map
+	b(r, c) = token_map(p.token());
+}
+
+
+// for convenience we have a function to
+// map 'o' to tictactoe::entry::nought
+// and 'x' to tictactoe::entry::cross
+tictactoe::entry token_map(char token_) {
+	if (token_ == 'o') {
+		return tictactoe::entry::nought;
+	}
+	else if (token_ == 'x') {
+		return tictactoe::entry::cross;
+	}
+	else {
+		throw TokenException();
 	}
 }
