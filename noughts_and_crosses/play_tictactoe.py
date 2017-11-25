@@ -33,8 +33,11 @@ def get_token():
     else:
         return 'x'
 
+# Player 1
 print("Mr One")
+# Select token
 print(get_token())
+# Player 2
 print("Mr Two")
 
 
