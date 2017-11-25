@@ -203,7 +203,7 @@ void play_a_game(int game_no, Player& p1, Player& p2) {
 	bool in_play = true;
 	while (in_play) {
 		cout << "Move number " << i << endl;
-		if (i % 2 == 0) {
+		if (i % 2 == 1) {
 			make_move(b, p1);
 			cout << b << endl;
 			tictactoe::entry t = token_map(p1.token());
