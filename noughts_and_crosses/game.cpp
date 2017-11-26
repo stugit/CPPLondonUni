@@ -289,13 +289,12 @@ void make_move(tictactoe::board& b, Player& p) {
 // map 'o' to tictactoe::entry::nought
 // and 'x' to tictactoe::entry::cross
 tictactoe::entry token_map(char token_) {
-	if (token_ == 'o') {
-		return tictactoe::entry::nought;
-	}
-	else if (token_ == 'x') {
-		return tictactoe::entry::cross;
-	}
-	else {
-		throw TokenException();
+	switch(token_) {
+		case 'o':
+			return tictactoe::entry::nought;
+		case 'x':
+			return tictactoe::entry::cross;
+		default:
+			throw TokenException();
 	}
 }
