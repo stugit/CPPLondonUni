@@ -71,7 +71,8 @@ to help you get started -- you are  not required to use them.
 **Have fun!**
 
 
-Usage: 
+## Streaming Keystrokes ##
+
 To stream random keystrokes to tictactoe.
 Edit play_tictactoe.py to configure names and how many games you want to play.
 
